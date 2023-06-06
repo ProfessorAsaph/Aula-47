@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Task from "../interfaces/Task";
+import TaskServiceFront from "../services/TaskServiceFront";
 
 export default function CreateTask() {
 
@@ -15,6 +16,17 @@ export default function CreateTask() {
 
     const handleChange = (e : React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
         setTask({...task, [e.target.name]: e.target.value})
+    };
+
+    const saveTask = (e : any) => {
+        e.preventDefault();
+        TaskServiceFront.saveTask(task)
+            .then((response) => {
+                console.log(response);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
     };
 
     return(
@@ -53,7 +65,7 @@ export default function CreateTask() {
             </div>
 
             <div>
-                <button>Add</button>
+                <button onClick={saveTask}>Add</button>
             </div>
         </>
     );
