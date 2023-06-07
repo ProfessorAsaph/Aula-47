@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 export default function UpdateTask(){
 
     const [task, setTask] = useState<Task>();
+    const [readOnly, setReadOnly] = useState<boolean>(true);
 
     const { id } = useParams();
 
@@ -14,6 +15,17 @@ export default function UpdateTask(){
             setTask({...task, [e.target.name]: e.target.value});
         }
     };
+
+    const handleIsDone = (checked: boolean)  => {
+        if(task !== undefined){
+            setTask({...task, done: checked});
+        }
+    };
+
+    const readOnlyToggle = () => {
+        setReadOnly(false);
+    }
+
 
     useEffect(() => {
 
@@ -44,6 +56,7 @@ export default function UpdateTask(){
                         placeholder="name..."
                         value={task.name}
                         onChange={(e) => handleChange(e)}
+                        disabled={readOnly}
                     />
                 </div>
     
@@ -54,6 +67,7 @@ export default function UpdateTask(){
                         placeholder="description..."
                         value={task.description}
                         onChange={(e) => handleChange(e)}
+                        disabled={readOnly}
                     />
                 </div>
     
@@ -64,11 +78,29 @@ export default function UpdateTask(){
                         name="deadlineDate"
                         value={task.deadlineDate}
                         onChange={(e) => handleChange(e)}
+                        disabled={readOnly}
                     />
+                </div>
+
+                <div> 
+                    <label>
+                        Is Done:
+                        <input
+                            type="checkbox"
+                            checked={task.done}
+                            onChange={(e) => handleIsDone(e.target.checked)}
+                            disabled={readOnly}
+                        />     
+                    </label>
+
                 </div>
     
                 <div>
-                    {/* <button onClick={saveTask}>Add</button> */}
+                    {readOnly ? 
+                        <button onClick={readOnlyToggle}> Edit </button>
+                        :
+                        <button> Save </button>
+                    }
                 </div>
             </>
         );

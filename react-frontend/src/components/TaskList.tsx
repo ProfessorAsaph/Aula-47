@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Task from "../interfaces/Task";
 import TaskServiceFront from "../services/TaskServiceFront";
+import { Link } from "react-router-dom";
 
 export default function TaskList() {
 
@@ -54,7 +55,7 @@ function TaskListRow(props: TaskListRowProps){
     return(
         <tr>
             <td>{props.task.id}</td>
-            <td>{props.task.name}</td>
+            <td><Link to={"/" + props.task.id}>{props.task.name}</Link></td>
             <td>{props.task.deadlineDate}</td>
             <td>{props.task.done ? "True": "False"}</td>
         </tr>
