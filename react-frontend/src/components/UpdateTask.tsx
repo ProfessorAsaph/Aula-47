@@ -9,6 +9,12 @@ export default function UpdateTask(){
 
     const { id } = useParams();
 
+    const handleChange = (e : React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
+        if(task !== undefined){
+            setTask({...task, [e.target.name]: e.target.value});
+        }
+    };
+
     useEffect(() => {
 
         const fetchTask = async () => {
@@ -22,13 +28,13 @@ export default function UpdateTask(){
 
         fetchTask();
 
-    },[]);
+    },[id]);
 
 
     if(task !== undefined){
         return(
             <>
-                <h1>Create Task</h1>
+                <h1>Task id: {task.id}</h1>
     
                 <div>
                     <label>Name: </label>
@@ -37,7 +43,7 @@ export default function UpdateTask(){
                         name="name"
                         placeholder="name..."
                         value={task.name}
-                        // onChange={(e) => handleChange(e)}
+                        onChange={(e) => handleChange(e)}
                     />
                 </div>
     
@@ -47,7 +53,7 @@ export default function UpdateTask(){
                         name="description"
                         placeholder="description..."
                         value={task.description}
-                        // onChange={(e) => handleChange(e)}
+                        onChange={(e) => handleChange(e)}
                     />
                 </div>
     
@@ -57,7 +63,7 @@ export default function UpdateTask(){
                         type="datetime-local"
                         name="deadlineDate"
                         value={task.deadlineDate}
-                        // onChange={(e) => handleChange(e)}
+                        onChange={(e) => handleChange(e)}
                     />
                 </div>
     

@@ -20,4 +20,5 @@ class TaskServiceFront {
     }
 }
 
-export default new TaskServiceFront();
+const taskServiceFront = new TaskServiceFront();
+export default taskServiceFront;

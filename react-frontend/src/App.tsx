@@ -3,11 +3,12 @@ import './App.css';
 import CreateTask from './components/CreateTask';
 import TaskList from './components/TaskList';
 import UpdateTask from './components/UpdateTask';
+import TaskHeader from './components/TaskHeader';
 
 export default function App() {
   return (
     <BrowserRouter>
-      <h1>Tasks</h1>
+      <TaskHeader />
       <Routes>
         <Route index element={<TaskList />}></Route>
         <Route path='/' element={<TaskList />}></Route>
