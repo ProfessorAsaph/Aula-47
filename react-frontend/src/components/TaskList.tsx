@@ -1,51 +1,45 @@
+import { useEffect, useState } from "react";
 import Task from "../interfaces/Task";
-
-const DUMMY_TASK_LIST: Task[] = [
-    {
-        "id": 1,
-        "name": "Tarefa 1",
-        "description": "descriçao tarefa 1",
-        "creationDate": "2023-06-06T00:14:53.886+00:00",
-        "updateDate": "2023-06-06T00:14:53.886+00:00",
-        "deadlineDate": "2023-07-06T00:14:53.886+00:00",
-        "done": false
-    },
-    {
-        "id": 2,
-        "name": "Tarefa 2",
-        "description": "descriçao tarefa 2",
-        "creationDate": "2023-06-06T00:14:53.886+00:00",
-        "updateDate": "2023-06-06T00:14:53.886+00:00",
-        "deadlineDate": "2023-07-06T00:14:53.886+00:00",
-        "done": true
-    },
-    {
-      "id": 3,
-      "name": "Tarefa 3",
-      "description": "descriçao tarefa 3",
-      "creationDate": "2023-06-06T00:14:53.886+00:00",
-      "updateDate": "2023-06-06T00:14:53.886+00:00",
-      "deadlineDate": "2023-07-06T00:14:53.886+00:00",
-      "done": false
-    }
-  ];
+import TaskServiceFront from "../services/TaskServiceFront";
 
 export default function TaskList() {
 
-    const taskListRows = DUMMY_TASK_LIST.map( task =>
-        <TaskListRow task={task} />
+    const [taskList, setTaskList] = useState<Task[]>([]);
+
+    useEffect(() => {
+
+        const fetchTaskList = async () => {
+            try {
+                const response = await TaskServiceFront.getTasks();
+                setTaskList(response.data);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        fetchTaskList();
+
+    },[]);
+
+    const taskListRows = taskList.map( task =>
+        <TaskListRow task={task} key={task.id}/>
     );
 
     return(
         <table>
-            <tr>
-                <th>Id</th>
-                <th>Task Name</th>
-                <th>Deadline</th>
-                <th>Is Done</th>
-            </tr>
 
-            {taskListRows}
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Task Name</th>
+                    <th>Deadline</th>
+                    <th>Is Done</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {taskListRows}
+            </tbody>
 
         </table>
     );

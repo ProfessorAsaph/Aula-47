@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Task from "../interfaces/Task";
 import TaskServiceFront from "../services/TaskServiceFront";
+import { useNavigate } from "react-router-dom";
 
 export default function CreateTask() {
 
@@ -8,9 +9,9 @@ export default function CreateTask() {
         id: undefined,
         name: "",
         description: "",
-        creationDate: null,
-        updateDate: null,
-        deadlineDate: null,
+        creationDate: "",
+        updateDate: "",
+        deadlineDate: "",
         done: false,
     });
 
@@ -18,11 +19,14 @@ export default function CreateTask() {
         setTask({...task, [e.target.name]: e.target.value})
     };
 
+    const navigate = useNavigate();
+
     const saveTask = (e : any) => {
         e.preventDefault();
         TaskServiceFront.saveTask(task)
             .then((response) => {
                 console.log(response);
+                navigate("/")
             })
             .catch((error) => {
                 console.error(error);
