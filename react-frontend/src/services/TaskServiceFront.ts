@@ -24,6 +24,11 @@ class TaskServiceFront {
     deleteTaskById(id : string | number) {
         return axios.delete(TASK_API_BASE_URL + "/" + id);
     }
+
+    // Faz uma requisição PUT atualizando uma task por id
+    updateTaskById(id : string | number, task: Task){
+        return axios.put(TASK_API_BASE_URL + "/" + id, task);
+    }
 }
 
 const taskServiceFront = new TaskServiceFront();

@@ -42,4 +42,13 @@ public class TaskService {
         }
     }
 
+    public Task updateTask(Task task, Long id) {
+        if(id == task.getId())
+        {
+            return taskRepository.save(task);
+        }
+        
+        return null;
+    }
+
 }

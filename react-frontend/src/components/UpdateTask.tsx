@@ -40,6 +40,19 @@ export default function UpdateTask(){
         }
     };
 
+    const updateTask = () => {
+        if(task !== undefined){
+            TaskServiceFront.updateTaskById(id! , task).then((response) => {
+                console.log("Task with id: " + id + " was updated.")
+                setTask(response.data);
+                setReadOnly(true);
+            })
+            .catch((error) => {
+                console.error(error);
+            })
+        }
+    } 
+
 
     useEffect(() => {
 
@@ -114,7 +127,7 @@ export default function UpdateTask(){
                         <button onClick={readOnlyToggle}> Edit </button>
                         :
                         <>
-                            <button> Save </button>
+                            <button onClick={updateTask}> Save </button>
                             <button onClick={deleteTask}> Delete </button>
                         </>
                     }
