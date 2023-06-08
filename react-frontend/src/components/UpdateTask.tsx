@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Task from "../interfaces/Task";
 import TaskServiceFront from "../services/TaskServiceFront";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function UpdateTask(){
 
@@ -9,6 +9,8 @@ export default function UpdateTask(){
     const [readOnly, setReadOnly] = useState<boolean>(true);
 
     const { id } = useParams();
+
+    const navigate = useNavigate();
 
     const handleChange = (e : React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
         if(task !== undefined){
@@ -24,7 +26,19 @@ export default function UpdateTask(){
 
     const readOnlyToggle = () => {
         setReadOnly(false);
-    }
+    };
+
+    const deleteTask = () => {
+        if(task !== undefined){
+            try {
+                TaskServiceFront.deleteTaskById(task.id!);
+                console.log("Task With Id: " + task.id + " was deleted.");
+                navigate("/");
+            } catch (error) {
+                console.error(error);
+            }        
+        }
+    };
 
 
     useEffect(() => {
@@ -99,7 +113,10 @@ export default function UpdateTask(){
                     {readOnly ? 
                         <button onClick={readOnlyToggle}> Edit </button>
                         :
-                        <button> Save </button>
+                        <>
+                            <button> Save </button>
+                            <button onClick={deleteTask}> Delete </button>
+                        </>
                     }
                 </div>
             </>

@@ -35,4 +35,11 @@ public class TaskService {
         return taskRepository.save(task);
     }
 
+    public void deleteTask(Long id) {
+        Optional<Task> optTask = taskRepository.findById(id);
+        if (optTask.isPresent()) {
+            taskRepository.deleteById(id);
+        }
+    }
+
 }
