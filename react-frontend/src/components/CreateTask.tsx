@@ -35,41 +35,48 @@ export default function CreateTask() {
 
     return(
         <>
-            <h1>Create Task</h1>
+            <h2 className="text-2xl">Create Task</h2>
 
-            <div>
-                <label>Name: </label>
-                <input 
-                    type="text" 
-                    name="name"
-                    placeholder="name..."
-                    value={task.name}
-                    onChange={(e) => handleChange(e)}
-                />
-            </div>
+            <div className="flex flex-col">
 
-            <div>
-                <label>Description: </label>
-                <textarea 
-                    name="description"
-                    placeholder="description..."
-                    value={task.description}
-                    onChange={(e) => handleChange(e)}
-                />
-            </div>
+                <div className="flex py-1">
+                    <label>Name: </label>
+                    <input
+                        className="border-black border-2 rounded" 
+                        type="text" 
+                        name="name"
+                        placeholder="name..."
+                        value={task.name}
+                        onChange={(e) => handleChange(e)}
+                    />
+                </div>
 
-            <div>
-                <label>Deadline: </label>
-                <input
-                    type="datetime-local"
-                    name="deadlineDate"
-                    value={task.deadlineDate}
-                    onChange={(e) => handleChange(e)}
-                />
-            </div>
+                <div className="flex py-1">
+                    <label>Description: </label>
+                    <textarea 
+                        className="border-black border-2 rounded" 
+                        name="description"
+                        placeholder="description..."
+                        value={task.description}
+                        onChange={(e) => handleChange(e)}
+                    />
+                </div>
 
-            <div>
-                <button onClick={saveTask}>Add</button>
+                <div className="flex py-1">
+                    <label>Deadline: </label>
+                    <input
+                        className="border-black border-2 rounded"
+                        type="datetime-local"
+                        name="deadlineDate"
+                        value={task.deadlineDate}
+                        onChange={(e) => handleChange(e)}
+                    />
+                </div>
+
+                <div className="flex py-1">
+                    <button className="border-black border-2 rounded px-4 uppercase font-medium" onClick={saveTask}>Add</button>
+                </div>
+
             </div>
         </>
     );
