@@ -40,7 +40,7 @@ export default function CreateTask() {
             <div className="flex flex-col">
 
                 <div className="flex py-1">
-                    <label>Name: </label>
+                    <label className="mr-2">Name: </label>
                     <input
                         className="border-black border-2 rounded" 
                         type="text" 
@@ -52,9 +52,9 @@ export default function CreateTask() {
                 </div>
 
                 <div className="flex py-1">
-                    <label>Description: </label>
+                    <label className="mr-2">Description: </label>
                     <textarea 
-                        className="border-black border-2 rounded" 
+                        className="border-black border-2 rounded h-36 w-48" 
                         name="description"
                         placeholder="description..."
                         value={task.description}
@@ -63,7 +63,7 @@ export default function CreateTask() {
                 </div>
 
                 <div className="flex py-1">
-                    <label>Deadline: </label>
+                    <label className="mr-2">Deadline: </label>
                     <input
                         className="border-black border-2 rounded"
                         type="datetime-local"
@@ -74,7 +74,7 @@ export default function CreateTask() {
                 </div>
 
                 <div className="flex py-1">
-                    <button className="border-black border-2 rounded px-4 uppercase font-medium" onClick={saveTask}>Add</button>
+                    <button className="border-black border-2 rounded px-4 uppercase font-medium bg-green-400 focus:bg-green-500 hover:bg-green-500" onClick={saveTask}>Add</button>
                 </div>
 
             </div>
